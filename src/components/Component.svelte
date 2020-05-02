@@ -15,4 +15,4 @@
 <h1 on:click={console.log}>{name}</h1>
 
 <p>has head {face.head}</p>
-<p>has head {face.nose}</p>
+<p>has nose {face.nose}</p>
