@@ -1,0 +1,117 @@
+{
+  "description": "TODO",
+  "devDependencies": {
+    "@babel/core": "7.9.6",
+    "@babel/preset-env": "7.7.6",
+    "@babel/preset-typescript": "7.9.0",
+    "@pyoner/svelte-types": "3.4.4-2",
+    "@rollup/plugin-commonjs": "*",
+    "@rollup/plugin-node-resolve": "7.1.3",
+    "@rollup/plugin-typescript": "*",
+    "@storybook/addon-actions": "5.2.8",
+    "@storybook/addon-links": "5.2.8",
+    "@storybook/addons": "5.2.8",
+    "@storybook/svelte": "5.3.18",
+    "@testing-library/jest-dom": "5.5.0",
+    "@testing-library/svelte": "1.11.0",
+    "@types/jest": "25.2.1",
+    "@types/testing-library__jest-dom": "5.0.3",
+    "babel-jest": "*",
+    "babel-loader": "8.1.0",
+    "husky": "3.1.0",
+    "jest": "25.5.4",
+    "jsdom": "16.2.2",
+    "jsdom-global": "3.0.2",
+    "lint-staged": "9.5.0",
+    "mocha": "7.1.2",
+    "npm-run-all": "4.1.5",
+    "prettier": "1.19.1",
+    "rollup": "1.27.7",
+    "rollup-plugin-livereload": "1.0.1",
+    "rollup-plugin-svelte": "5.1.1",
+    "rollup-plugin-terser": "5.1.2",
+    "sirv-cli": "0.4.5",
+    "svelte": "3.21.0",
+    "svelte-jester": "1.0.5",
+    "svelte-loader": "2.13.6",
+    "ts-jest": "25.4.0",
+    "ts-loader": "7.0.2",
+    "typescript": "3.8.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "src",
+    "dist"
+  ],
+  "keywords": [
+    "svelte"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "run-s build test"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.svelte": [
+      "lint",
+      "git add"
+    ],
+    "src/**/*.ts": [
+      "lint",
+      "git add"
+    ],
+    "src/**/*.spec.ts": [
+      "ava"
+    ],
+    "cypress/**/*.spec.ts": [
+      "yarn build && yarn export && start-test serve 5999 spec "
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "babel-jest",
+      "^.+\\.ts$": "babel-jest",
+      "^.+\\.svelte$": [
+        "svelte-jester",
+        {
+          "preprocess": true,
+          "debug": false
+        }
+      ]
+    },
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "svelte"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
+  },
+  "license": "UNLICENSED",
+  "main": "dist/index.min.js",
+  "module": "dist/index.min.mjs",
+  "name": "TODO",
+  "repository": "TODO",
+  "scripts": {
+    "build": "rollup -c",
+    "devserver": "rollup -c -w",
+    "dev": "run-p devserver test:watch storybook start:dev",
+    "start": "sirv public --single",
+    "start:dev": "sirv public --single --dev",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "pretest": "tsc --noEmit",
+    "test": "jest src",
+    "posttest": "npm run format",
+    "test:watch": "yarn jest --watch",
+    "format": "prettier --write \"**/*.{js,css,md}\""
+  },
+  "svelte": "src/components/components.module.js",
+  "dependencies": {
+    "svelte-preprocess": "3.7.4"
+  }
+}
